@@ -8,6 +8,7 @@ public class Graphics_management {
     }
 }
 
+//椭圆形
 class Ellipsoid implements Graphics{
     double major_semi_axis;
     double minor_semi_axis;
@@ -27,6 +28,7 @@ class Ellipsoid implements Graphics{
     }
 }
 
+//矩形
 class Rectangle implements Graphics{
     double length;
     double width;
@@ -46,6 +48,7 @@ class Rectangle implements Graphics{
     }
 }
 
+//三角形
 class Triangle implements Graphics{
     double edge_1;
     double edge_2;
