@@ -9,7 +9,7 @@ public class Graphics_management {
     public static void main(String[] args){
         Scanner sc = new Scanner(System.in);
         Graphics_Factory graphicsFactory = new Graphics_Factory();
-        String graphicsType = null;
+        String graphicsType;
         System.out.println("选择三种图形中的一种，椭圆形、矩形和三角形：");
         graphicsType = sc.next();
         Graphics graphics = graphicsFactory.getGraphics(graphicsType);
@@ -30,24 +30,8 @@ class Ellipsoid implements Graphics{
     /*
     椭圆形
      */
-    private double major_semi_axis;
-    private double minor_semi_axis;
-
-    public double getMajor_semi_axis() {
-        return major_semi_axis;
-    }
-
-    public void setMajor_semi_axis(double major_semi_axis) {
-        this.major_semi_axis = major_semi_axis;
-    }
-
-    public double getMinor_semi_axis() {
-        return minor_semi_axis;
-    }
-
-    public void setMinor_semi_axis(double minor_semi_axis) {
-        this.minor_semi_axis = minor_semi_axis;
-    }
+    private final double major_semi_axis;
+    private final double minor_semi_axis;
 
     public Ellipsoid(double major_semi_axis, double minor_semi_axis) {
         this.major_semi_axis = major_semi_axis;
@@ -74,24 +58,8 @@ class Rectangle implements Graphics{
     /*
     矩形
      */
-    private double length;
-    private double width;
-
-    public double getLength() {
-        return length;
-    }
-
-    public void setLength(double length) {
-        this.length = length;
-    }
-
-    public double getWidth() {
-        return width;
-    }
-
-    public void setWidth(double width) {
-        this.width = width;
-    }
+    private final double length;
+    private final double width;
 
     public Rectangle(double length, double width) {
         this.length = length;
@@ -118,33 +86,9 @@ class Triangle implements Graphics{
     /*
     三角形
      */
-    private double edge_1;
-    private double edge_2;
-    private double edge_3;
-
-    public double getEdge_1() {
-        return edge_1;
-    }
-
-    public void setEdge_1(double edge_1) {
-        this.edge_1 = edge_1;
-    }
-
-    public double getEdge_2() {
-        return edge_2;
-    }
-
-    public void setEdge_2(double edge_2) {
-        this.edge_2 = edge_2;
-    }
-
-    public double getEdge_3() {
-        return edge_3;
-    }
-
-    public void setEdge_3(double edge_3) {
-        this.edge_3 = edge_3;
-    }
+    private final double edge_1;
+    private final double edge_2;
+    private final double edge_3;
 
     public Triangle(double edge_1, double edge_2, double edge_3) {
         this.edge_1 = edge_1;
