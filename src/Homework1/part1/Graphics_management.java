@@ -156,7 +156,12 @@ class Graphics_Factory{
                 edge_1 = sc.nextDouble();
                 edge_2 = sc.nextDouble();
                 edge_3 = sc.nextDouble();
-                graphics = new Triangle(edge_1, edge_2, edge_3);
+                if((edge_1 + edge_2 > edge_3) && (edge_1 + edge_3 > edge_2) && (edge_2 + edge_3 > edge_1)){
+                    graphics = new Triangle(edge_1, edge_2, edge_3);
+                }
+                else{
+                    System.out.println("请输入正确的三角形。");
+                }
                 break;
         }
         sc.close();
