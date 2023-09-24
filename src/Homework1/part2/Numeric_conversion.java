@@ -1,7 +1,9 @@
 package Homework1.part2;
 
 import java.util.Scanner;
-
+/**
+ * @author 吴禹 2023214309
+ */
 public class Numeric_conversion {
     public static void main(String[] args){
         Scanner sc = new Scanner(System.in);
