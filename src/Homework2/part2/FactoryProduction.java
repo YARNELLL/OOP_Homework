@@ -1,5 +1,7 @@
 package Homework2.part2;
-
+/**
+ * @author 吴禹 2023214309
+ */
 public class FactoryProduction {
     public static void main(String[] args){
         AbstractFactory clothFactory = new ClothFactory();

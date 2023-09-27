@@ -1,6 +1,8 @@
 package Homework2.part1;
 
-import java.util.Scanner;
+/**
+ * @author 吴禹 2023214309
+ */
 
 public class E_mall {
     public static void main(String[] args){
