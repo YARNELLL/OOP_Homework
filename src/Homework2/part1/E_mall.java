@@ -4,18 +4,20 @@ import java.util.Scanner;
 
 public class E_mall {
     public static void main(String[] args){
-        Scanner sc = new Scanner(System.in);
-        System.out.println("请选择购买的电子产品（computer，phone，camera）：");
-        String equipmentType = sc.next();
-        ElectronicEquipmentFactory factory = new ElectronicEquipmentFactory();
-        ElectronicEquipment equipment = factory.getElectronicEquipment(equipmentType);
-        if(equipment != null){
-            equipment.Run();
-        }
-        else{
-            System.out.println("请输入正确的电子产品名称。");
-        }
-        sc.close();
+        System.out.println("购买电脑：");
+        ElectronicEquipmentFactory computerFactory = new ComputerFactory();
+        ElectronicEquipment computer = computerFactory.Produce();
+        computer.Run();
+        System.out.println("-------------");
+        System.out.println("购买手机：");
+        ElectronicEquipmentFactory phoneFactory = new PhoneFactory();
+        ElectronicEquipment phone = phoneFactory.Produce();
+        phone.Run();
+        System.out.println("-------------");
+        System.out.println("购买相机：");
+        ElectronicEquipmentFactory cameraFactory = new CameraFactory();
+        ElectronicEquipment camera = cameraFactory.Produce();
+        camera.Run();
     }
 }
 
@@ -47,18 +49,32 @@ class Camera implements ElectronicEquipment{
     }
 }
 
-class ElectronicEquipmentFactory{
-    public ElectronicEquipment getElectronicEquipment(String equipmentType){
-        ElectronicEquipment equipment = null;
-        if(equipmentType.equalsIgnoreCase("computer")){
-            equipment = new Computer();
-        }
-        else if(equipmentType.equalsIgnoreCase(("phone"))){
-            equipment = new Phone();
-        }
-        else if(equipmentType.equalsIgnoreCase(("camera"))){
-            equipment = new Camera();
-        }
-        return equipment;
+interface ElectronicEquipmentFactory{
+    ElectronicEquipment Produce();
+}
+
+class ComputerFactory implements ElectronicEquipmentFactory{
+
+    @Override
+    public ElectronicEquipment Produce() {
+        System.out.println("Producing a computer");
+        return new Computer();
+    }
+}
+class PhoneFactory implements ElectronicEquipmentFactory{
+
+    @Override
+    public ElectronicEquipment Produce() {
+        System.out.println("Producing a phone");
+        return new Phone();
+    }
+}
+
+class CameraFactory implements ElectronicEquipmentFactory{
+
+    @Override
+    public ElectronicEquipment Produce() {
+        System.out.println("Producing a camera");
+        return new Camera();
     }
 }
