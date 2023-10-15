@@ -4,15 +4,17 @@ import java.util.*;
 
 public class StrategyPattern {
     public static void main(String[] args){
-        int totalPrice = 0;
         try{
+            MilkTea milkTea = new MilkTea();
             Context context = new Context(new SelectMilkTeaSize());
-            totalPrice += context.executeStrategy();
+            context.executeStrategy(milkTea);
             context = new Context(new SelectMilkTeaBase());
-            totalPrice += context.executeStrategy();
+            context.executeStrategy(milkTea);
             context = new Context(new SelectMilkTeaCharge());
-            totalPrice += context.executeStrategy();
-            System.out.println("总价为：" + totalPrice);
+            context.executeStrategy(milkTea);
+            System.out.println("奶茶大小为：" + milkTea.getSize() + "，茶底为：" + milkTea.getBase() +
+                    "，加料为：" + milkTea.getCharge());
+            System.out.println("总价为：" +milkTea.getPrice());
         }
         catch(IllegalArgumentException | IOException e){
             System.out.println(e.getMessage());
@@ -21,28 +23,10 @@ public class StrategyPattern {
 }
 
 interface Strategy{
-    int totalPrice() throws IOException;
-}
-
-class GetThePrice{
-    public static int getThePrice(int price, Map<String, Integer> toPrice) throws IOException {
-        for (Map.Entry<String, Integer> entry : toPrice.entrySet()){
-            System.out.print(entry.getKey() + "：" + entry.getValue() + "```");
-        }
-        System.out.println();
-        String input = (new BufferedReader(new InputStreamReader(System.in))).readLine();
-        if(toPrice.containsKey(input)){
-            price += toPrice.get(input);
-        }
-        else{
-            throw new IllegalArgumentException("错误: 请输入正确的名称。");
-        }
-        return price;
-    }
+    void totalPrice(MilkTea milkTea) throws IOException;
 }
 
 class SelectMilkTeaSize implements Strategy{
-
     private final Map<String, Integer> sizeToPrice;
 
     public SelectMilkTeaSize(){
@@ -52,11 +36,9 @@ class SelectMilkTeaSize implements Strategy{
         sizeToPrice.put("Super", 10);
     }
     @Override
-    public int totalPrice() throws IOException {
-        int price = 0;
+    public void totalPrice(MilkTea milkTea) throws IOException {
         System.out.print("请选择奶茶的大小：");
-        price = GetThePrice.getThePrice(price, sizeToPrice);
-        return price;
+        GetThePrice.getThePrice(1, sizeToPrice, milkTea);
     }
 }
 
@@ -70,11 +52,9 @@ class SelectMilkTeaBase implements Strategy{
         baseToPrice.put("Black tea", 4);
     }
     @Override
-    public int totalPrice() throws IOException {
-        int price = 0;
+    public void totalPrice(MilkTea milkTea) throws IOException {
         System.out.print("请选择奶茶的茶底：");
-        price = GetThePrice.getThePrice(price, baseToPrice);
-        return price;
+        GetThePrice.getThePrice(2, baseToPrice, milkTea);
     }
 }
 
@@ -89,16 +69,12 @@ class SelectMilkTeaCharge implements Strategy{
         chargeToPrice.put("Milk cover", 3);
     }
     @Override
-    public int totalPrice() throws IOException {
-        int price;
-        int t_price = 0;
+    public void totalPrice(MilkTea milkTea) throws IOException {
+        String[] charge_input = new String[1];
         do{
-            price = t_price;
             System.out.print("请选择奶茶的加料：");
-            t_price = GetThePrice.getThePrice(price, chargeToPrice);
-        }while(t_price != price);
-
-        return price;
+            GetThePrice.getThePrice(chargeToPrice, milkTea, charge_input);
+        }while(!charge_input[0].equals("Not add"));
     }
 }
 
@@ -108,7 +84,7 @@ class Context{
     public Context(Strategy strategy){
         this.strategy = strategy;
     }
-    public int executeStrategy() throws IOException{
-        return strategy.totalPrice();
+    public void executeStrategy(MilkTea milkTea) throws IOException{
+        strategy.totalPrice(milkTea);
     }
 }
