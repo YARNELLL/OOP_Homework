@@ -1,6 +1,5 @@
 package Homework5.part1;
 
-import java.io.File;
 import java.util.*;
 
 public class Antivirus {
