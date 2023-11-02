@@ -1,7 +1,5 @@
 package Homework4;
 
-import com.sun.org.apache.xerces.internal.impl.xs.SchemaNamespaceSupport;
-
 import java.io.*;
 import java.util.*;
 
