@@ -12,10 +12,6 @@ public class RecruitmentSystem {
 
         Job j1 = new Job("前端","北京");
         Job j2 = new Job("后端","北京");
-        Job j3 = new Job("大数据","北京");
-        Job j4 = new Job("算法","北京");
-        Job j5 = new Job("后端","上海");
-        Job j6 = new Job("前端","深圳");
 
         j1.add_company("c1");
         j1.add_subscriber(s1);
@@ -58,7 +54,7 @@ class JobSeeker implements Subscriber{
 }
 
 class Job{
-    private List<JobSeeker> subscribers;
+    private List<Subscriber> subscribers;
     private List<String> companies;
     private String job_type;
     private String workplace;
@@ -83,7 +79,7 @@ class Job{
 
     public void add_company(String company_name){
         this.companies.add(company_name);
-        for(JobSeeker subscriber : this.subscribers){
+        for(Subscriber subscriber : this.subscribers){
             subscriber.update(company_name);
         }
     }
